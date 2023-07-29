@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="stylesheet" href="styles.css">
+    <title>Pregnancy Due Date Calculator</title>
+</head>
+
+<body>
+    <div class="calc_container">
+        <h3 class="calc_title">Pregnancy Due Date Calculator</h3>
+        <div class="calc_details">
+            <div class="box_hlder">
+                <label for="lpdDate">When was the first day of your last period?</label>
+                <div class="hlder calendar">
+                    <select id="lpdDay"></select>
+                    <select id="lpdMonth"></select>
+                    <input type="number" id="lpdYear" value="2023" required>
+                </div>
+            </div>
+            <div class="box_hlder">
+                <label for="lengthCycle">Cycle length in Days</label>
+                <div class="hlder">
+                    <span class="minus" onclick="minus('lengthCycle')" id="minus">-</span>
+                    <span class="amount">
+                        <input type="number" value="28" id="lengthCycle">
+                    </span>
+                    <span class="plus" onclick="plus('lengthCycle')" id="plus">+</span>
+                </div>
+            </div>
+            <div class="box_hlder">
+                <div class="hlder btn">
+                    <button type="date" id="resultBtn" onclick="addClearBtn()">Click to see the Results Below!</button>
+                </div>
+            </div>
+            <div class="box_hlder">
+                <div class="hlder results">
+                    <div id="pregnancyDateResult"></div>
+                    <div id="dueDateResult"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+<script src="script.js"></script>
+
+</html>

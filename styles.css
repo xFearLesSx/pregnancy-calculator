@@ -1,0 +1,286 @@
+@font-face {
+    font-family: 'Filson Pro';
+    src: url('FilsonPro-Regular.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Filson Pro';
+    src: url('FilsonPro-Black.woff2') format('woff2');
+    font-weight: 900;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Filson Pro';
+    src: url('FilsonPro-Bold.woff2') format('woff2');
+    font-weight: bold;
+    font-style: normal;
+}
+
+* {
+    font-family: 'Filson Pro', Arial, Helvetica, sans-serif;
+}
+
+
+body {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(to top left, #f2d03e, #00ac6f);
+    font-family: 'Filson Pro', Arial, Helvetica, sans-serif;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+    margin: 0;
+    padding: 0;
+}
+
+.calc_container {
+    width: 100%;
+    max-width: 650px;
+    background: #fff;
+    color: #2a245a;
+    padding: 0;
+    box-shadow: 1px 1px 10px 2px rgba(0, 0, 0, 0.5);
+    /* position: absolute; */
+    /* top: 50%; */
+    /* left: 50%; */
+    /* transform: translate(-50%, -50%); */
+}
+
+.calc_container .calc_title {
+    font-size: 35px;
+    line-height: 1.5;
+    width: auto;
+    margin: 0;
+    padding: 10px;
+    border: none;
+    text-align: center;
+    background: #00ac6f;
+    color: #fff;
+    max-width: 100%;
+    font-weight: 900;
+}
+
+.calc_container .calc_details {
+    width: 100%;
+    max-width: 100%;
+}
+
+.box_hlder {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid #000;
+    border-top: none;
+    width: 100%;
+    border-left: none;
+    border-right: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 15px 0;
+}
+
+
+.box_hlder>label {
+    width: 100%;
+    padding: 0;
+    font-size: 25px;
+    line-height: 1.3;
+    text-align: center;
+}
+
+.box_hlder .hlder {
+    width: 100%;
+    padding: 15px;
+    font-size: 30px;
+    line-height: 1.3;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: fit-content;
+    padding-bottom: 0;
+}
+
+.box_hlder .hlder.calendar>* {
+    font-family: 'Filson Pro', Arial, Helvetica, sans-serif;
+    border: 1px solid #a587c8;
+    border-radius: 0;
+    color: #2a245a;
+}
+
+.box_hlder .hlder.btn {
+    padding: 0 15px;
+    justify-content: center;
+    width: 100%;
+}
+
+.box_hlder .hlder.calendar {
+    justify-content: space-between;
+    max-width: 100%;
+    width: fit-content;
+    margin: 15px auto 0;
+    padding: 0;
+}
+
+.box_hlder .hlder input::-webkit-outer-spin-button,
+.box_hlder .hlder input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.box_hlder .hlder input[type=number] {
+    -moz-appearance: textfield;
+}
+
+.box_hlder .hlder .minus,
+.box_hlder .hlder .plus {
+    cursor: pointer;
+    color: #fff;
+    background: #a587c8;
+    padding: 0 15px;
+    font-size: 30px;
+    font-weight: 700;
+    border-radius: 5px;
+}
+
+.box_hlder .hlder .minus:hover,
+.box_hlder .hlder .plus:hover,
+.box_hlder .hlder.btn #resultBtn:hover {
+    background: #00ac6f;
+}
+
+.box_hlder .hlder .amount {
+    text-align: center;
+}
+
+.box_hlder .hlder .amount input {
+    padding: 8px 15px;
+    height: 28px;
+    width: 110px;
+    max-width: 100%;
+    border: none;
+    font-size: 18px;
+    text-align: center;
+}
+
+.box_hlder .hlder.btn #resultBtn {
+    background: #a587c8;
+    border: none;
+    height: 40px;
+    line-height: 40px;
+    color: #fff;
+    padding: 0 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+
+.box_hlder .hlder.results {
+    justify-content: center;
+    width: 100%;
+    flex-direction: column;
+    padding: 0;
+    max-width: 100%;
+}
+
+.d_block {
+    display: block !important;
+}
+
+.box_hlder .hlder.results #clearBtn {
+    background: #a587c8;
+    border: none;
+    height: 40px;
+    line-height: 40px;
+    color: #fff;
+    padding: 0 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 20px 0 0px;
+}
+
+.box_hlder .hlder.calendar #lpdMonth {
+    margin: 0 5px;
+}
+
+#pregnancyDateResult {
+    font-weight: 900;
+    font-size: 28px;
+}
+
+#dueDateResult {
+    color: #a587c8;
+    font-size: 33px;
+    font-weight: 900;
+    margin-top: 15px;
+}
+
+.box_hlder .hlder.calendar select,
+.box_hlder .hlder.calendar input {
+    color: #a587c8;
+    padding: 10px;
+    height: 40px;
+}
+
+.box_hlder .hlder.calendar input {
+    height: 38px;
+    padding: 0 10px;
+}
+
+@media only screen and (max-width: 768px) {
+    .box_hlder {
+        flex-direction: column;
+        text-align: center;
+        padding: 15px;
+        max-width: 100%;
+        width: auto;
+    }
+
+    .box_hlder .hlder {
+        width: 100% !important;
+        max-width: fit-content !important;
+    }
+
+    .box_hlder>label {
+        width: 100%;
+        padding: 0;
+        font-size: 25px;
+        line-height: 1.2;
+    }
+
+    .calc_container .calc_title {
+        font-size: 25px;
+        line-height: 1.2;
+    }
+}
+
+@media only screen and (max-width: 526px) {
+    #pregnancyDateResult {
+        font-size: 22px;
+    }
+
+    #dueDateResult {
+        font-size: 25px;
+    }
+
+    .box_hlder .hlder.calendar #lpdYear {
+        width: 100px;
+    }
+
+    .box_hlder .hlder .minus,
+    .box_hlder .hlder .plus {
+        line-height: 1.4;
+        padding: 0 12px;
+    }
+}
