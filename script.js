@@ -140,12 +140,17 @@ window.addEventListener('DOMContentLoaded', function () {
 
         var currentDate = new Date();
         var fetalAge = Math.floor((currentDate - lpdDate) / (1000 * 60 * 60 * 24));
-        var weeks = parseInt(fetalAge / 7);
-        var days = Math.floor(fetalAge % 7);
+        var weeks = Math.floor(fetalAge / 7);
+        var days = fetalAge % 7;
 
         var formattedDueDate = formatDate(dueDate);
 
-        pregnancyDateDiv.innerHTML = 'You are ' + weeks + " week" + (weeks > 1 ? "s" : "") + " and " + days + " day" + (days > 1 ? "s" : "") + ' pregnant';
+        if (fetalAge >= 7) {
+            pregnancyDateDiv.innerHTML = 'You are ' + weeks + ' week' + (weeks > 1 ? 's' : '') + (days > 0 ? ' and ' + days + ' day' + (days > 1 ? 's' : '') : '') + ' pregnant';
+        } else {
+            pregnancyDateDiv.innerHTML = 'You are ' + fetalAge + ' day' + (fetalAge > 1 ? 's' : '') + ' pregnant';
+        }
+
         dueDateDiv.innerHTML = 'Your due date is ' + formattedDueDate
 
         if (!clearBtn) {
