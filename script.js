@@ -32,7 +32,7 @@ window.addEventListener('DOMContentLoaded', function () {
     function addResetButton() {
         clearBtn = document.createElement('button');
         clearBtn.id = 'clearBtn';
-        clearBtn.textContent = 'Click to calculate Again!';
+        clearBtn.textContent = 'Click to calculate again!';
         clearBtn.addEventListener('click', resetForm);
         document.querySelector('.hlder.results').appendChild(clearBtn);
     }
