@@ -110,7 +110,7 @@ window.addEventListener('DOMContentLoaded', function () {
 
         disableFormInputs();
         addPointerEvents();
-        showMessage('Calculation complete! Please see the results below!', true);
+        // showMessage('Calculation complete! Please see the results below!', true);
     }
 
     function resetForm() {
