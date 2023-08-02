@@ -13,7 +13,7 @@
     <div class="calc_container">
         <h3 class="calc_title">Pregnancy Due Date Calculator</h3>
         <div class="calc_details">
-            <div class="box_hlder">
+            <div class="box_hlder lastPD">
                 <label for="lpdDate">When was the first day of your last period?</label>
                 <div class="hlder calendar">
                     <select id="lpdDay"></select>
@@ -21,7 +21,7 @@
                     <input type="number" id="lpdYear" value="2023" required>
                 </div>
             </div>
-            <div class="box_hlder">
+            <div class="box_hlder Cycle">
                 <label for="lengthCycle">Cycle length in Days</label>
                 <div class="hlder">
                     <span class="minus" onclick="minus('lengthCycle')" id="minus">-</span>
@@ -37,7 +37,9 @@
                 </div>
             </div>
             <div class="box_hlder">
+                <!-- <div class="successMessage"></div> -->
                 <div class="hlder results">
+                    <div id="message"></div>
                     <div id="pregnancyDateResult"></div>
                     <div id="dueDateResult"></div>
                 </div>

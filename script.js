@@ -26,14 +26,13 @@ window.addEventListener('DOMContentLoaded', function () {
     var resultBtn = document.getElementById('resultBtn');
     resultBtn.addEventListener('click', calculateDueDate);
 
-    var pregnancyDateDiv = document.getElementById('pregnancyDateResult');
-    var dueDateDiv = document.getElementById('dueDateResult');
+    var messageDiv = document.getElementById('message');
     var clearBtn;
 
     function addResetButton() {
         clearBtn = document.createElement('button');
         clearBtn.id = 'clearBtn';
-        clearBtn.textContent = 'Click to Calculate Again!';
+        clearBtn.textContent = 'Click to calculate Again!';
         clearBtn.addEventListener('click', resetForm);
         document.querySelector('.hlder.results').appendChild(clearBtn);
     }
@@ -44,52 +43,6 @@ window.addEventListener('DOMContentLoaded', function () {
         clearBtn = null;
     }
 
-    function updateLPDDays() {
-        var lpdDaySelect = document.getElementById('lpdDay');
-        var lpdMonthSelect = document.getElementById('lpdMonth');
-        var lpdYearInput = document.getElementById('lpdYear');
-
-        var month = lpdMonthSelect.value;
-        var year = parseInt(lpdYearInput.value, 10);
-
-        if (isNaN(year)) {
-            return;
-        }
-
-        var daysInMonth = getDaysInMonth(month, year);
-        var currentDay = parseInt(lpdDaySelect.value, 10);
-
-        lpdDaySelect.innerHTML = '';
-
-        for (var day = 1; day <= daysInMonth; day++) {
-            var option = document.createElement('option');
-            option.value = day;
-            option.textContent = day;
-            lpdDaySelect.appendChild(option);
-        }
-
-        if (currentDay >= 1 && currentDay <= daysInMonth) {
-            lpdDaySelect.value = currentDay;
-        }
-    }
-
-    function getDaysInMonth(month, year) {
-        var monthsWith31Days = ['January', 'March', 'May', 'July', 'August', 'October', 'December'];
-
-        if (month === 'February') {
-            return isLeapYear(year) ? 29 : 28;
-        } else {
-            return monthsWith31Days.includes(month) ? 31 : 30;
-        }
-    }
-
-    function isLeapYear(year) {
-        return (year % 4 === 0 && year % 100 !== 0) || year % 400 === 0;
-    }
-
-    var lpdYearInput = document.getElementById('lpdYear');
-    lpdYearInput.addEventListener('input', updateLPDDays);
-
     function calculateDueDate() {
         var lpdDaySelect = document.getElementById('lpdDay');
         var lpdMonthSelect = document.getElementById('lpdMonth');
@@ -99,7 +52,7 @@ window.addEventListener('DOMContentLoaded', function () {
         var lpdYear = parseInt(lpdYearInput.value, 10);
 
         if (isNaN(lpdDay) || isNaN(lpdYear)) {
-            alert('Please enter a valid date!');
+            showMessage('Please enter a valid date!');
             return;
         }
 
@@ -111,12 +64,12 @@ window.addEventListener('DOMContentLoaded', function () {
         var selectedDate = new Date(lpdYear, getMonthIndex(lpdMonth), lpdDay);
 
         if (selectedDate > currentDate) {
-            alert('Please enter a date on or before the current date.');
+            showMessage('Please enter a date on or before the current date.');
             return;
         }
 
         if (selectedDate < minDate) {
-            alert('Please enter a date within the last 9 months.');
+            showMessage('Please enter a date within the last 9 months.');
             return;
         }
 
@@ -126,32 +79,30 @@ window.addEventListener('DOMContentLoaded', function () {
         var lengthCycle = parseInt(lengthCycleInput.value, 10);
 
         if (isNaN(lengthCycle) || lengthCycle <= 19 || lengthCycle >= 45) {
-            alert('Please enter a valid cycle length!');
+            showMessage('Please enter a valid cycle length! Must be between 20 and 44');
             return;
-        } else {
-            alert('Congratulations, please see the details below!');
         }
 
-        var gestationPeriod = 280;
+        var gestationPeriod = 280; // Default gestation period in days
         gestationPeriod += (lengthCycle - 28);
 
         var dueDate = new Date(lpdDate);
         dueDate.setDate(dueDate.getDate() + gestationPeriod);
 
+        var formattedDueDate = formatDate(dueDate);
+
         var currentDate = new Date();
-        var fetalAge = Math.floor((currentDate - lpdDate) / (1000 * 60 * 60 * 24));
+        var fetalAge = Math.floor((currentDate - lpdDate) / (1000 * 60 * 60 * 24)); // In days
         var weeks = Math.floor(fetalAge / 7);
         var days = fetalAge % 7;
 
-        var formattedDueDate = formatDate(dueDate);
-
         if (fetalAge >= 7) {
-            pregnancyDateDiv.innerHTML = 'You are ' + weeks + ' week' + (weeks > 1 ? 's' : '') + (days > 0 ? ' and ' + days + ' day' + (days > 1 ? 's' : '') : '') + ' pregnant';
+            pregnancyDateResult.innerHTML = 'You are ' + weeks + ' week' + (weeks > 1 ? 's' : '') + (days > 0 ? ' and ' + days + ' day' + (days > 1 ? 's' : '') : '') + ' pregnant';
         } else {
-            pregnancyDateDiv.innerHTML = 'You are ' + fetalAge + ' day' + (fetalAge > 1 ? 's' : '') + ' pregnant';
+            pregnancyDateResult.innerHTML = 'You are ' + fetalAge + ' day' + (fetalAge > 1 ? 's' : '') + ' pregnant';
         }
 
-        dueDateDiv.innerHTML = 'Your due date is ' + formattedDueDate
+        dueDateResult.innerHTML = 'Your due date is ' + formattedDueDate;
 
         if (!clearBtn) {
             addResetButton();
@@ -159,20 +110,23 @@ window.addEventListener('DOMContentLoaded', function () {
 
         disableFormInputs();
         addPointerEvents();
+        showMessage('Calculation complete! Please see the results below!', true);
     }
 
     function resetForm() {
         var lpdDaySelect = document.getElementById('lpdDay');
         var lpdMonthSelect = document.getElementById('lpdMonth');
         var lpdYearInput = document.getElementById('lpdYear');
-        var pregnancyDateDiv = document.getElementById('pregnancyDateResult');
-        var dueDateDiv = document.getElementById('dueDateResult');
+        var lengthCycleInput = document.getElementById('lengthCycle');
+        var pregnancyDateResultDiv = document.getElementById('pregnancyDateResult');
+        var dueDateResultDiv = document.getElementById('dueDateResult');
 
         lpdDaySelect.value = '';
         lpdMonthSelect.value = '';
         lpdYearInput.value = '';
-        pregnancyDateDiv.innerHTML = '';
-        dueDateDiv.innerHTML = '';
+        lengthCycleInput.value = '';
+        pregnancyDateResultDiv.innerHTML = '';
+        dueDateResultDiv.innerHTML = '';;
 
         if (clearBtn) {
             removeResetButton();
@@ -180,6 +134,18 @@ window.addEventListener('DOMContentLoaded', function () {
 
         enableFormInputs();
         removePointerEvents();
+        showMessage('Form reset!', true);
+    }
+
+    function showMessage(message, success) {
+        messageDiv.textContent = message;
+        messageDiv.style.color = success ? 'green' : 'red';
+        messageDiv.style.display = 'block';
+    }
+
+    function hideMessage() {
+        messageDiv.textContent = '';
+        messageDiv.style.display = 'none';
     }
 
     function formatDate(date) {
@@ -200,7 +166,6 @@ window.addEventListener('DOMContentLoaded', function () {
             'January', 'February', 'March', 'April', 'May', 'June',
             'July', 'August', 'September', 'October', 'November', 'December'
         ];
-
         return months.indexOf(month);
     }
 
@@ -209,7 +174,6 @@ window.addEventListener('DOMContentLoaded', function () {
         var lpdMonthSelect = document.getElementById('lpdMonth');
         var lpdYearInput = document.getElementById('lpdYear');
         var lengthCycleInput = document.getElementById('lengthCycle');
-
         lpdDaySelect.disabled = true;
         lpdMonthSelect.disabled = true;
         lpdYearInput.disabled = true;
@@ -221,7 +185,6 @@ window.addEventListener('DOMContentLoaded', function () {
         var lpdMonthSelect = document.getElementById('lpdMonth');
         var lpdYearInput = document.getElementById('lpdYear');
         var lengthCycleInput = document.getElementById('lengthCycle');
-
         lpdDaySelect.disabled = false;
         lpdMonthSelect.disabled = false;
         lpdYearInput.disabled = false;
@@ -238,14 +201,30 @@ window.addEventListener('DOMContentLoaded', function () {
         document.getElementById("plus").style.pointerEvents = "auto";
     }
 
-    // Populate days and months
-    var lpdDaySelect = document.getElementById('lpdDay');
-    for (var i = 1; i <= 31; i++) {
-        var option = document.createElement('option');
-        option.value = i;
-        option.textContent = i;
-        lpdDaySelect.appendChild(option);
+    function updateDays() {
+        var lpdDaySelect = document.getElementById('lpdDay');
+        var lpdMonthSelect = document.getElementById('lpdMonth');
+        var lpdYearInput = document.getElementById('lpdYear');
+        var lpdMonth = lpdMonthSelect.value;
+        var lpdYear = parseInt(lpdYearInput.value, 10);
+
+        var daysInMonth = new Date(lpdYear, getMonthIndex(lpdMonth) + 1, 0).getDate();
+        lpdDaySelect.innerHTML = '';
+
+        for (var i = 1; i <= daysInMonth; i++) {
+            var option = document.createElement('option');
+            option.value = i;
+            option.textContent = i;
+            lpdDaySelect.appendChild(option);
+        }
     }
+
+    var lpdMonthSelect = document.getElementById('lpdMonth');
+    var lpdYearInput = document.getElementById('lpdYear');
+
+    lpdYearInput.addEventListener('change', updateDays);
+    lpdMonthSelect.addEventListener('change', updateDays);
+    updateDays();
 
     var lpdMonthSelect = document.getElementById('lpdMonth');
     var months = [
@@ -259,4 +238,6 @@ window.addEventListener('DOMContentLoaded', function () {
         lpdMonthSelect.appendChild(option);
     }
 
+    // Hide the message initially
+    hideMessage();
 });
