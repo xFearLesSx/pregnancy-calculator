@@ -241,11 +241,12 @@ p {
 .box_hlder .hlder.calendar input {
     color: #a587c8;
     padding: 10px;
-    height: 40px;
+    height: 50px;
+    font-size: 18px;
 }
 
 .box_hlder .hlder.calendar input {
-    height: 38px;
+    height: 48px;
     padding: 0 10px;
 }
 
