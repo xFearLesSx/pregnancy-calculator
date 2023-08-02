@@ -220,6 +220,7 @@ p {
 #pregnancyDateResult {
     font-weight: 900;
     font-size: 28px;
+    text-align: center;
 }
 
 #dueDateResult {
@@ -227,6 +228,7 @@ p {
     font-size: 33px;
     font-weight: 900;
     margin-top: 0;
+    text-align: center;
 }
 
 #message {

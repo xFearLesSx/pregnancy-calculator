@@ -97,12 +97,12 @@ window.addEventListener('DOMContentLoaded', function () {
         var days = fetalAge % 7;
 
         if (fetalAge >= 7) {
-            pregnancyDateResult.innerHTML = 'You are ' + weeks + ' week' + (weeks > 1 ? 's' : '') + (days > 0 ? ' and ' + days + ' day' + (days > 1 ? 's' : '') : '') + ' pregnant';
+            pregnancyDateResult.innerHTML = 'You may be ' + weeks + ' week' + (weeks > 1 ? 's' : '') + (days > 0 ? ' and ' + days + ' day' + (days > 1 ? 's' : '') : '') + ' pregnant';
         } else {
             pregnancyDateResult.innerHTML = 'You are ' + fetalAge + ' day' + (fetalAge > 1 ? 's' : '') + ' pregnant';
         }
 
-        dueDateResult.innerHTML = 'Your due date is ' + formattedDueDate;
+        dueDateResult.innerHTML = 'Based on this information, your due date is around ' + formattedDueDate;
 
         if (!clearBtn) {
             addResetButton();
