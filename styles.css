@@ -298,12 +298,12 @@ p {
 
     .box_hlder .hlder.calendar>select,
     .box_hlder .hlder.calendar>input {
-        width: 230px;
+        width: 200px;
         max-width: 100%;
     }
 
     .box_hlder .hlder.calendar input {
-        width: 208px;
+        width: 178px;
     }
 
     .box_hlder .hlder.calendar>select#lpdMonth {
